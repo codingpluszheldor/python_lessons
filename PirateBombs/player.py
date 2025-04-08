@@ -15,9 +15,25 @@ class Player(pg.sprite.Sprite):
         self.rect.centery = start_y
         self.speed = 5
         self.add(group)
+        self.group = group
+        self.is_jump = False
 
     def update(self, buttons_pressed):
+        platforma = self.group.sprites()[1]
         if buttons_pressed[pg.K_RIGHT]:
             self.rect.centerx += self.speed
         if buttons_pressed[pg.K_LEFT]:
             self.rect.centerx -= self.speed
+
+        if buttons_pressed[pg.K_UP] and self.is_jump == False:
+            self.rect.centery -= self.speed * 15
+            self.is_jump = True
+        else:
+            if self.rect.colliderect(platforma.rect):
+                print("colliderect")
+                self.is_jump = False
+            else:
+                self.rect.centery += self.speed
+                if self.rect.y + self.image.get_height() > 192:
+                    self.rect.y = 192 - self.image.get_height()
+                    self.is_jump = False

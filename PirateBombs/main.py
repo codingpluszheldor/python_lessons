@@ -1,16 +1,18 @@
 import pygame as pg
 from player import *
+from platforma import *
 from backgroud import *
 
-win_w = 768
-win_h = 384
+win_w = 384
+win_h = 272
 fps = 60
 
 pg.init()
 window = pg.display.set_mode((win_w, win_h))
 clock = pg.time.Clock()
 sprites_timer = pg.sprite.Group()
-Player(win_w // 2, win_h // 2, sprites_timer)
+Player(win_w // 2, win_h // 4, sprites_timer)
+Platforma(win_w // 2, win_h // 2, sprites_timer)
 bg = Background()
 
 running = True
