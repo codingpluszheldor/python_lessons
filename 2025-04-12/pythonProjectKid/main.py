@@ -12,7 +12,7 @@ clock = pg.time.Clock()
 
 group = pg.sprite.Group()
 Level_1(0, 0, group)
-Prince(win_w // 2, win_h // 2, group)
+Prince(100, 70, group)
 
 running = True
 while running:
@@ -25,6 +25,7 @@ while running:
     group.draw(window)
 
     pg.display.flip()
-    clock.tick(fps)
+    time_delta = clock.tick(fps) / 1000.0
+    group.update(time_delta, buttons_pressed)
 
 pg.quit()
